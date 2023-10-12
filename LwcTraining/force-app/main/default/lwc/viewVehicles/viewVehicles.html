@@ -1,0 +1,11 @@
+<template>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <template for:each={vehicles} for:item="item">
+            <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.Id} title={item.Name}>
+                <img src={item.Preview__c}/>
+                <p slot="footer">{item.Name} | {item.Year__c}</p>
+                <lightning-button variant="Brand" label="Comprar" title="Comprar" data-id={item.Id} onclick={purchase}></lightning-button>
+            </lightning-card>
+        </template>
+    </div>/
+</template>
