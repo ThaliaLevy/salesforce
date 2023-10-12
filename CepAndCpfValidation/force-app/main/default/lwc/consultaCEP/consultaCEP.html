@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Buscar endereço por CEP">
+        <div style="padding:5%">
+            <button label="Buscar endereço por CEP" class="slds-button slds-button_brand" onclick={openSection}>Buscar</button>
+        </div>
+    </lightning-card>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Busca endereço</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_2-of-4 slds-p-vertical_xx-small">
+                            <lightning-input type="text" label="CEP" value={cepData.cep} onchange={saveCepForSearch}></lightning-input> 
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-vertical_xx-small">
+                            <lightning-input type="text" label="Número" onchange={saveNumber}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-vertical_xx-small">
+                            <a class="searchIcon" onclick={searchCep}><img class="searchIcon" src="https://img.freepik.com/vetores-premium/icone-de-pesquisa-simbolo-da-lupa-icone-de-contorno_543062-139.jpg?w=2000"/></a>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-2 slds-p-vertical_xx-small">
+                            <lightning-input type="text" label="Rua" value={cepData.rua} disabled></lightning-input>
+                            <lightning-input type="text" label="Cidade" value={cepData.cidade} disabled></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-vertical_xx-small">
+                            <lightning-input type="text" label="Bairro" value={cepData.bairro} disabled></lightning-input>
+                            <lightning-input type="text" label="Estado" value={cepData.estado} disabled></lightning-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeSection}>Cancelar</button>
+                    <button class="slds-button slds-button_brand" onclick={saveCep}>Salvar</button>
+                </div>
+            </div>
+        </section>  
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>
