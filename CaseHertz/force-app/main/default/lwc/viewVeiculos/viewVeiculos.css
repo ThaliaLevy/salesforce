@@ -1,0 +1,128 @@
+img{
+    width: 100%;
+    height: 100%;
+    max-height: 300px;
+    min-height: 300px;
+}
+
+.botaoPlanos {
+    margin-left: 35%;
+    font-size: 14px;
+}
+
+.botaoVeiculos {
+    font-size: 14px;
+    margin-left: 35%;
+    margin-top: 60px;
+}
+
+.botaoSeguros {
+    margin-left: 5%;
+}
+
+.botaoQuilometragem {
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+.botaoUltimasInformacoes {
+    margin-left: 46%;
+}
+
+.blocoPlano {
+    max-width: 1200px;
+    margin-left: 20%;
+    margin-top: 3%;
+}
+
+.blocoVeiculos {
+    max-width: 1450px;
+}
+
+
+.blocoDadosReserva {
+    width: 510px;
+    margin-left: 450px;
+    font-size: 14px;
+}
+
+.blocoBeneficios {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+}
+
+.blocoUltimasInformacoes {
+    width: 1000px;
+    margin-left: 200px;
+}
+
+.blocoSeguros {
+    width: 1000px;
+    margin-left: 200px;
+}
+
+.pDescricaoSeguro {
+    max-height: 200px;
+    min-height: 200px;
+}
+
+.divOpcoes {
+    margin-top: 14%;
+}
+
+.divUltimasInformacoes {
+    margin-left: 32%;
+}
+
+.divBeneficios {
+    margin-top: -210px;
+    z-index: 100;
+    position: relative;
+}
+
+.imagensPlanos {
+    max-height: 70px;
+    min-height: 70px;
+    width: 75px;
+    margin-left: 40%;
+}
+
+.iconeSeta {
+    width: 17px;
+    height: 17px;
+    max-height: 17px;
+    min-height: 17px;
+}
+
+.descricaoPlano {
+    padding: 5%;
+    height: 210px;
+}
+
+.pdescription {
+    height: 65px;
+    padding: 5%;
+    padding-bottom: 0% !important;
+}
+
+.dadosQuilometragem {
+    text-align: center;
+    font-size: 15px;
+}
+
+.dadosReserva {
+    min-height: 150px;
+    max-height: 150px;
+    padding: 5%;
+}
+
+.none{
+    display: none;
+    position: absolute;
+}
+
+.block{
+    display: block;
+    position: absolute;
+}

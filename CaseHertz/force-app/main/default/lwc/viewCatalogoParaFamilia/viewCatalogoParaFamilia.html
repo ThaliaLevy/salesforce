@@ -1,0 +1,12 @@
+<template>
+    <h1> Diárias de R$500.</h1>
+    <div class="slds-grid slds-wrap slds-gutters">
+      <template for:each={informacoesVeiculos} for:item="item">
+            <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.id} title={item.name}>
+                <img src={item.displayUrl}/>
+                <p slot="footer"><b> {item.name} | {item.family} | R${item.unitPrice} a diária </b></p>
+                <p class="pdescription">{item.description}</p>
+                </lightning-card>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,166 @@
+<template>
+    <hr>
+    <div id="idDadosReserva" class="none">
+        <div class="blocoDadosReserva">
+            <lightning-card> 
+                <h4 style="margin-left: 30%;">DADOS DA RESERVA</h4>
+                <div class="dadosReserva">
+                    <span><b>Plano selecionado:</b> {planoEscolhido} <br></span>
+                    <span id="idDadosReservaVeiculo" class="none"> <b>Veículo selecionado:</b> {veiculoEscolhido} </span><br>
+                    <span id="idDadosReservaItemAdicional" class="none"> <b>Item adicional selecionado:</b> {itemAdicionalEscolhido} </span><br>
+                    <span id="idDadosReservaSeguro" class="none"> <b>Seguro selecionado:</b> {seguroEscolhido} </span><br>
+                </div>
+            </lightning-card>
+        </div>
+        <hr width="1400px">
+    </div>
+    <div id="idPlanos" class="block" >
+        <h4 style="margin-left: 20%;">Etapa 1/6 - Selecione um <b>plano</b> para seguir com a sua reserva.</h4>
+        <div class="slds-grid slds-wrap slds-gutters blocoPlano">
+            <template for:each={informacoesWrapper.planosParaLocacao} for:item="item">
+                <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.Id} title={item.Name}> 
+                    <img class="imagensPlanos" src={item.ImagemPlano__c}/>
+                    <p class="descricaoPlano">
+                        <b>Plano {item.Name}</b> <br>
+                        Na contratação desse plano, há um desconto de {item.DescontoSobreDiaria__c}% sob o valor da diária do veículo.
+                    </p>
+                    <lightning-button class="botaoPlanos" variant="Brand" label="Selecionar" title="Selecionar" data-id={item.Name}  onclick={guardarPlanoEscolhido}></lightning-button>
+                </lightning-card>
+            </template>
+        </div>
+        <div class="divBeneficios">
+            <div class="slds-grid slds-wrap slds-gutters blocoPlano">
+                <div class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small"> 
+                    <div class="blocoBeneficios">
+                        <p for:each={informacoesWrapper.beneficiosPlanoAnual} for:item="item" key={item.Id}>
+                            <img class="iconeSeta" src="https://levythalia.com/wp-content/uploads/2023/09/arrow.png"/> {item} <br>
+                        </p>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small"> 
+                    <div class="blocoBeneficios">
+                        <p for:each={informacoesWrapper.beneficiosPlanoMensal} for:item="item" key={item.Id}>
+                            <img class="iconeSeta" src="https://levythalia.com/wp-content/uploads/2023/09/arrow.png"/> {item} <br>
+                        </p>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small"> 
+                    <div class="blocoBeneficios">
+                        <p for:each={informacoesWrapper.beneficiosPlanoSemestral} for:item="item" key={item.Id}>
+                            <img class="iconeSeta" src="https://levythalia.com/wp-content/uploads/2023/09/arrow.png"/> {item} <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="idVeiculos" class="none"> 
+        <div class="divOpcoes">
+            <h4 style="margin-left: 20%; margin-bottom: 3%;">Etapa 2/6 - Selecione um <b>veículo</b> para seguir com a sua reserva.</h4>
+            <div class="slds-grid slds-wrap slds-gutters blocoVeiculos">
+                <template for:each={informacoesWrapper.veiculosParaFamiliaComDesconto5Porcento} for:item="item">
+                    <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.id} title={item.name}>
+                        <img src={item.displayUrl}/>
+                        <p slot="footer"><b style="font-size: 16px">Preço com desconto R${precoComDescontoParaFamilia}/mês</b> <br> {item.name} | {item.family} </p>
+                        <p class="pdescription">{item.description}</p>
+                        <div class="botaoVeiculos">
+                            <lightning-button variant="Brand" label="Reservar veículo" title="Reservar veículo" data-id={item.name} onclick={guardarVeiculoEscolhido}></lightning-button>
+                        </div>
+                        </lightning-card>
+                </template>
+                <template for:each={informacoesWrapper.veiculosLuxuososComDesconto5Porcento} for:item="item">
+                    <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.id} title={item.name}>
+                        <img src={item.displayUrl}/>
+                        <p slot="footer"><b style="font-size: 16px">Preço com desconto R${precoComDescontoLuxuosos}/mês</b> <br> {item.name} | {item.family} </p>
+                        <p class="pdescription">{item.description}</p>
+                        <div class="botaoVeiculos">
+                            <lightning-button variant="Brand" label="Reservar veículo" title="Reservar veículo" data-id={item.name} onclick={guardarVeiculoEscolhido}></lightning-button>
+                        </div>
+                        </lightning-card>
+                </template> 
+                <template for:each={informacoesWrapper.veiculosEconomicosComDesconto5Porcento} for:item="item">
+                    <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.id} title={item.name}>
+                            <img src={item.displayUrl}/>
+                            <p slot="footer"><b style="font-size: 16px">Preço com desconto R${precoComDescontoCompactos}/mês</b> <br> {item.name} | {item.family} </p>
+                            <p class="pdescription">{item.description}</p>
+                            <div class="botaoVeiculos">
+                                <lightning-button variant="Brand" label="Reservar veículo" title="Reservar veículo" data-id={item.name} onclick={guardarVeiculoEscolhido}></lightning-button>
+                            </div>
+                        </lightning-card>
+                </template> 
+            </div>
+        </div>
+    </div>
+    <div id="idItensAdicionais" class="none"> 
+        <div class="divOpcoes">
+            <h4 style="margin-left: 20%; margin-bottom: 3%;">Etapa 3/6 - Selecione um <b>item adicional</b> ou clique em "Sem item adicional" para seguir com a sua reserva.</h4>
+            <lightning-button variant="Brand" label="Sem item adicional" title="Sem item adicional"></lightning-button>
+            <div class="slds-grid slds-wrap slds-gutters blocoVeiculos">
+                <template for:each={informacoesWrapper.itemAdicionalComDesconto20Porcento} for:item="item">
+                    <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.id} title={item.name}>
+                        <img src={item.displayUrl}/>
+                        <p slot="footer"><b style="font-size: 16px">Preço com desconto R${precoComDescontoItemAdicional}/mês</b> <br> {item.name} | {item.family} </p>
+                        <p class="pdescription">{item.description}</p>
+                        <div class="botaoVeiculos">
+                            <lightning-button variant="Brand" label="Selecionar" title="Selecionar" data-id={item.name} onclick={guardarItemAdicionalEscolhido}></lightning-button>
+                        </div>
+                    </lightning-card>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div id="idSeguros" class="none"> 
+        <div class="divOpcoes">
+            <h4 style="margin-left: 20%; margin-bottom: 3%;">Etapa 4/6 - Selecione um <b>seguro</b> obrigatório para seguir com a sua reserva.</h4>
+            <div class="slds-grid slds-wrap slds-gutters blocoSeguros">
+                <template for:each={informacoesWrapper.seguros} for:item="item">
+                    <lightning-card class="slds-col slds-size_1-of-3 slds-p-vertical_xx-small" key={item.id} style="text-align: center;">
+                        <div class="pDescricaoSeguro">
+                            <p style="padding: 5%; height: 160px"> 
+                                <b style="font-size: 14px">Seguro {item.name}</b> <br><br>
+                                {item.sinistrosCobertos}
+                            </p>
+                            <p slot="footer"><b style="font-size: 14px">R${item.unitPrice}/mês</b></p>
+                            <div class="botaoSeguros">
+                                <lightning-button variant="Brand" label="Selecionar" title="Selecionar" data-id={item.name} onclick={guardarSeguroEscolhido}></lightning-button>
+                            </div>
+                        </div>
+                    </lightning-card>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div id="idUltimasInformacoes" class="none"> 
+        <div class="divOpcoes">
+            <h4 style="margin-left: 34%; margin-bottom: 3%;">Etapa 5/6 - Preencha os campos para finalizar sua reserva.</h4>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-p-vertical_xx-small divUltimasInformacoes">
+                    <div>
+                        <lightning-input type="text" label="Digite seu CPF" onchange={guardarCPFDoCliente} style="width: 500px"></lightning-input>
+                    </div>
+                    <div>
+                        <template for:each={quilometragens} for:item="item">
+                            <lightning-combobox key={item.Name} label="Selecione a quilometragem (km/mês)" name="opcaoSelecionada" value={item.opcaoSelecionada} options={item.options} onchange={guardarQuilometragemEscolhida} style="width: 500px">
+                            </lightning-combobox>
+                        </template>
+                    </div>
+                    <div>
+                        <lightning-input type="date" label="Data de retirada do veículo" value={selectedDate} onchange={guardarDataRetiradaEscolhida} style="width: 500px"></lightning-input>
+                    </div>
+                   <div>
+                        <template for:each={opcoesDiasVencimento} for:item="item">
+                            <lightning-combobox key={item} label="Dia de pagamento da fatura " name="opcaoSelecionada" value={item.opcaoSelecionada} options={item.options} onchange={guardarDataVencimentoEscolhida} style="width: 500px">
+                            </lightning-combobox>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <lightning-button class="botaoUltimasInformacoes" variant="Brand" label="Finalizar reserva" title="Finalizar reserva" onclick={finalizarReserva}></lightning-button>
+        </div>
+    </div>  
+    <div id="idTelaAgradecimento" class="none">
+        <h1>Agradecemos a sua reserva! <br>
+        Em breve você reberá um e-mail com todos os detalhes da reserva e instruções para os próximos passos.</h1>
+    </div>        
+</template>
