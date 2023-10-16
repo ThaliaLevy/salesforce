@@ -22,7 +22,7 @@ public class CepData {
     }
     
     @AuraEnabled
-    public static String saveCepData(string cepData, Id idCurrentAccount, String numberSaved) {
+    public static Account saveCepData(string cepData, Id idCurrentAccount, String numberSaved) {
         try {
             if(String.isBlank(numberSaved))
                 numberSaved = 'S/N';
@@ -38,8 +38,7 @@ public class CepData {
 
             update currentAccount;
 
-            return cepData;
-
+            return currentAccount;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
