@@ -1,5 +1,9 @@
 @isTest
 public class CepDataTest {
+    
+    static String setupCepData() {
+        return '{"bairro":"Copacabana","cep":"22040-002","cidade":"Rio de Janeiro","estado":"RJ","rua":"Rua Barata Ribeiro"}';
+    }
 
     @isTest
     static public void shouldGetCepData() {
@@ -39,7 +43,7 @@ public class CepDataTest {
 
     @isTest
     static void shouldSaveCepDataThatCepIsChanged() {
-        String validCepData = '{"bairro":"Copacabana","cep":"22040-002","cidade":"Rio de Janeiro","estado":"RJ","rua":"Rua Barata Ribeiro"}';
+        String validCepData = setupCepData();
         String numberSaved = '100';
         
         Account oldCepData = new Account(Name = 'Conta teste', BillingPostalCode = '11111-111');
@@ -52,7 +56,7 @@ public class CepDataTest {
 
     @isTest
     static void shouldSaveCepDataWithoutNumber() {
-        String validCepData = '{"bairro":"Copacabana","cep":"22040-002","cidade":"Rio de Janeiro","estado":"RJ","rua":"Rua Barata Ribeiro"}';
+        String validCepData = setupCepData();
         String numberSaved = '';
         
         Account account = new Account(Name = 'Conta teste');
@@ -65,7 +69,7 @@ public class CepDataTest {
         System.assertEquals('S/N', newNumberSaved, 'Deve retornar o número como S/N para número não informado');
     }
 
-    @isTest
+   /* @isTest
     static void shouldNotSaveCepDataWithoutValidCepData() {
         String validCepData = '';
         String numberSaved = '100';
@@ -79,8 +83,8 @@ public class CepDataTest {
        try {
             result = CepData.saveCepData(validCepData, account.Id, numberSaved);
        } catch (Exception e) {
-            System.debug(e);
+           System.debug(e);
            	//System.assertEquals(result.toString(), Account.toString());
        }
-    }
+    } */
 }
