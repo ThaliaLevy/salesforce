@@ -9,8 +9,8 @@ public with sharing class AccountTriggerHandler {
     }
     */
 
-    /*
-    class 4:
+    
+    /*class 4:
     public static void updateAccRating(List<Account> newAccounts) {
         if(!newAccounts.isEmpty()) {
             for(Account account : newAccounts) {
