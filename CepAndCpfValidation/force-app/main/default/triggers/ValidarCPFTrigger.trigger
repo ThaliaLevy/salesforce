@@ -2,7 +2,7 @@ trigger ValidarCPFTrigger on Account (before insert, before update) {
   	public class CpfException extends Exception {} 
     String message;
     
-    /*if(Trigger.isUpdate || Trigger.isInsert) {
+    if(Trigger.isUpdate || Trigger.isInsert) {
         for(Account acc : Trigger.new) {
             String cpf = acc.Cpf__c;
             
@@ -21,7 +21,7 @@ trigger ValidarCPFTrigger on Account (before insert, before update) {
                     acc.addError(message);
             }
         }
-    }*/
+    }
     
     public static void validateIfCpfHasOnlyNumbers(String cpf) {
        Pattern pattern = Pattern.compile('^[0-9]+$');
